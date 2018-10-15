@@ -1,6 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
+header("Content-Type: application/x-www-form-urlencoded");
 
 $servername="localhost";
 $username="root";
@@ -73,7 +74,7 @@ if($row = mysqli_fetch_assoc($result)){
    
 }else{
     $response = array('successful' =>false,
-                      'error' => "Login unsuccessful. Please try again.");
+                      'error' => "Login unsuccessful. Please try again.",$email);
 }
 echo json_encode($response);
 
