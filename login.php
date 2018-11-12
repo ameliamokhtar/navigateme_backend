@@ -41,7 +41,8 @@ if($row = mysqli_fetch_assoc($result)){
                 'position' => $row_staff['position'],
                 'email' => $row_staff['email'],
                 'phone_num' => $row_staff['phone_num'],
-                'prefix' => $row_staff['prefix'] 
+                'prefix' => $row_staff['prefix'],
+                'role' => $row['role']
             );
         }
     }else if($row['role'] == 2){
@@ -57,8 +58,22 @@ if($row = mysqli_fetch_assoc($result)){
                 'password' => $row['password'],
                 'role' => $row['role'],
                 'email' => $row['email'],
-                'phone_number' => $row_student['phone_number'],
-                'prefix' => $row_student['prefix'] 
+                'phone_num' => $row_student['phone_number']
+            );
+        }
+    }else if($row['role'] == 3){
+        $sql_guest = "SELECT * FROM `guest_information` WHERE `user_id` = '$id'";
+        $result_guest = mysqli_query($conn,$sql_guest);
+        if($row_guest = mysqli_fetch_assoc($result_guest)){
+            $response = array
+            (
+                'successful' =>true,
+                'user_id' => $row_guest['user_id'],
+                'full_name' => $row_guest['full_name'],
+                'password' => $row['password'],
+                'role' => $row['role'],
+                'email' => $row['email'],
+                'phone_num' => $row_guest['phone_number']
             );
         }
     }else{ //admin

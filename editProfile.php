@@ -40,7 +40,7 @@ if($result){
             $response = array
             (
                 'successful' =>true,
-                'student_id' => $row_staff['staff_id'],
+                'staff_id' => $row_staff['staff_id'],
                 'user_id' => $row_staff['user_id'],
                 'address' => $row_staff['address'],
                 'full_name' => $row_staff['full_name'],
