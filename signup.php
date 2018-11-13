@@ -31,8 +31,12 @@ if($result){
         $a = $_POST['address'] ;
         $position = $_POST['position'] ;
         $id = mysqli_insert_id($conn);
-        $sql_staff = "INSERT INTO staff_information (`user_id`, `full_name`, `position`, `address`, `phone_num`, `email`, `prefix` ) VALUES 
-        ('$id','$fn','$position','$a','$m','$e','$p')";
+        $lt = $_POST['location_id'];
+        $add = $_POST['address'];
+        $p = $_POST['prefix'];
+        $position = $_POST['position'];
+        $sql_staff = "INSERT INTO staff_information (`user_id`,`full_name`,`phone_num`,`position`,`email`,`prefix`,`location_id`,`address`) VALUES 
+        ('$id','$fn','$m','$position','$e','$p','$lt','$add')";
         $result_staff = mysqli_query($conn,$sql_staff);
         if($result_staff){
             $response = array('successful' =>true , 'msg' => 'Staff Sign Up Succesful');
@@ -42,7 +46,18 @@ if($result){
     }
     else if($r == 2){ //student
         $id = mysqli_insert_id($conn);
-        $sql_student = "INSERT INTO student_information (`user_id`, `full_name`, `phone_number`) VALUES ('$id','$fn','$m')";
+        $sql_student = "INSERT INTO student_information (`user_id`,`full_name`, `phone_number`,`email`) 
+        VALUES ('$id','$fn','$m','$e')";
+        $result_student = mysqli_query($conn,$sql_student);
+        if($result_student){
+            $response = array('successful' =>true , 'msg' => 'Student SignUp Succesfully');
+        }else{
+            $response = array('successful' =>false , 'msg' => 'Student SignUp Unsuccesful');
+        }
+    }else if($r == 3){
+        $id = mysqli_insert_id($conn);
+        $sql_student = "INSERT INTO guest_information (`user_id`,`full_name`, `phone_number`,`email`) 
+        VALUES ('$id','$fn','$m','$e')";
         $result_student = mysqli_query($conn,$sql_student);
         if($result_student){
             $response = array('successful' =>true , 'msg' => 'Student Sign Up Succesful');
